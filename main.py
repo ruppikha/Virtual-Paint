@@ -4,7 +4,7 @@ import numpy as np
 frameWidth = 640
 frameHeight = 480
 
-# Try different camera indices if 1 doesn't work
+# Try different camera indices
 cap = cv2.VideoCapture(1)
 if not cap.isOpened():
     cap = cv2.VideoCapture(0)
@@ -16,28 +16,30 @@ cap.set(4, frameHeight)
 cap.set(10, 150)
 
 myColors = [
-    [90, 48, 0, 118, 255, 255]    # Blue
+    [90, 48, 0, 118, 255, 255],  # Blue
+    [35, 100, 100, 85, 255, 255]    # Green
 ]
 
 myColorValues = [
-    [255, 0, 0]       # BGR for Blue
+    [255, 0, 0],  # BGR for Blue
+    [0, 255, 0]   # BGR for Green
 ]
 
 myPoints = []  # [x, y, colorId]
 
 def findColor(img, myColors, myColorValues):
     imgHSV = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-    count = 0
     newPoints = []
-    for color in myColors:
-        lower = np.array(color[0:3])
-        upper = np.array(color[3:6])
+    for count, color in enumerate(myColors):
+        lower = np.array(color[:3])
+        upper = np.array(color[3:])
         mask = cv2.inRange(imgHSV, lower, upper)
         x, y = getContours(mask)
         if x != 0 and y != 0:
-            cv2.circle(imgResult, (x, y), 15, myColorValues[count], cv2.FILLED)
-            newPoints.append([x, y, count])
-        count += 1
+            cv2.circle(imgResult, (x, y), 15, myColorValues[count % len(myColorValues)], cv2.FILLED)
+            newPoints.append([x, y, count % len(myColorValues)])
+        # Display the mask for debugging
+        cv2.imshow(f"Mask {count}", mask)
     return newPoints
 
 def getContours(img):
