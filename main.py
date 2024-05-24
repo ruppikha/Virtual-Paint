@@ -49,7 +49,6 @@ def findColor(img, myColors, myColorValues):
         cv2.putText(imgResult, "Blue detected", (10, 50), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 0, 0), 3)
     if colorDetected[1]:
         cv2.putText(imgResult, "Green detected", (10, 100), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 3)
-
     return newPoints
 
 def getContours(img):
