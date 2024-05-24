@@ -27,17 +27,20 @@ myPoints = []  # [x, y, colorId]
 
 def findColor(img, myColors, myColorValues):
     imgHSV = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-    count = 0
     newPoints = []
-    for color in myColors:
-        lower = np.array(color[0:3])
-        upper = np.array(color[3:6])
+    for count, color in enumerate(myColors):
+        lower = np.array(color[:3])
+        upper = np.array(color[3:])
         mask = cv2.inRange(imgHSV, lower, upper)
         x, y = getContours(mask)
         if x != 0 and y != 0:
-            cv2.circle(imgResult, (x, y), 15, myColorValues[count], cv2.FILLED)
-            newPoints.append([x, y, count])
-        count += 1
+            cv2.circle(imgResult, (x, y), 15, myColorValues[count % len(myColorValues)], cv2.FILLED)
+            newPoints.append([x, y, count % len(myColorValues)])
+        # Display the mask for debugging
+        cv2.imshow(f"Mask {count}", mask)
+
+    if colorDetected[0]:
+        cv2.putText(imgResult, "Blue detected", (10, 50), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 0, 0), 3)
     return newPoints
 
 def getContours(img):
