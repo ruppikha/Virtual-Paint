@@ -4,7 +4,7 @@ import numpy as np
 frameWidth = 640
 frameHeight = 480
 
-# Try different camera indices if 1 doesn't work
+# Try different camera indices
 cap = cv2.VideoCapture(1)
 if not cap.isOpened():
     cap = cv2.VideoCapture(0)
@@ -16,11 +16,13 @@ cap.set(4, frameHeight)
 cap.set(10, 150)
 
 myColors = [
-    [90, 48, 0, 118, 255, 255]    # Blue
+    [90, 48, 0, 118, 255, 255],  # Blue
+    [35, 100, 100, 85, 255, 255]    # Green
 ]
 
 myColorValues = [
-    [255, 0, 0]       # BGR for Blue
+    [255, 0, 0],  # BGR for Blue
+    [0, 255, 0]   # BGR for Green
 ]
 
 myPoints = []  # [x, y, colorId]
