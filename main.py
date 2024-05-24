@@ -40,6 +40,9 @@ def findColor(img, myColors, myColorValues):
             newPoints.append([x, y, count % len(myColorValues)])
         # Display the mask for debugging
         cv2.imshow(f"Mask {count}", mask)
+
+    if colorDetected[0]:
+        cv2.putText(imgResult, "Blue detected", (10, 50), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 0, 0), 3)
     return newPoints
 
 def getContours(img):
