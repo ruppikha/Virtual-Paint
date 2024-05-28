@@ -4,7 +4,6 @@ import numpy as np
 frameWidth = 640
 frameHeight = 480
 
-# Try different camera indices
 cap = cv2.VideoCapture(1)
 if not cap.isOpened():
     cap = cv2.VideoCapture(0)
