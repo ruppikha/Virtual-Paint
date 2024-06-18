@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-#i made an edit
+#i made an edi
 
 frameWidth = 640
 frameHeight = 480
