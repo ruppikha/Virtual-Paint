@@ -1,6 +1,8 @@
 import cv2
 import numpy as np
 
+#i made an edit
+
 frameWidth = 640
 frameHeight = 480
 
